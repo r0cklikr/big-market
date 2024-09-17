@@ -30,7 +30,7 @@ public class StrategyTest {
      */
     @Test
     public void test_strategyArmory() {
-        strategyArmory.assembleLotteryStrategy(100002L);
+        strategyArmory.assembleLotteryStrategy(100001L);
         //log.info("测试结果：{}", success);
     }
 
@@ -39,9 +39,13 @@ public class StrategyTest {
      */
     @Test
     public void test_getAssembleRandomVal() {
-        log.info("测试结果：{} - 奖品ID值", strategyArmory.getRandomAwardId(100002L));
-        log.info("测试结果：{} - 奖品ID值", strategyArmory.getRandomAwardId(100002L));
-        log.info("测试结果：{} - 奖品ID值", strategyArmory.getRandomAwardId(100002L));
+        ///log.info("测试结果：{} - 奖品ID值", strategyArmory.getRandomAwardId(100001L));
+        //log.info("测试结果：{} - 奖品ID值", strategyArmory.getRandomAwardId(100001L));
+        //log.info("测试结果：{} - 奖品ID值", strategyArmory.getRandomAwardId(100001L));
+        log.info("测试结果：{} - 奖品ID值", strategyArmory.getRandomAwardId(100001L));
+        log.info("测试结果：{} - 奖品ID值", strategyArmory.getRandomAwardId(100001L,"6000:102,103"));
+        log.info("测试结果：{} - 奖品ID值", strategyArmory.getRandomAwardId(100001L,"7000:104,105"));
+        log.info("测试结果：{} - 奖品ID值", strategyArmory.getRandomAwardId(100001L,"8000:106,107"));
     }
 
     @Resource

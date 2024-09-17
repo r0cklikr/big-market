@@ -23,4 +23,6 @@ public interface IStrategyArmory {
      */
     Integer getRandomAwardId(Long strategyId);
 
+
+    Integer getRandomAwardId(Long strategyId,String ruleWeightValue);
 }
