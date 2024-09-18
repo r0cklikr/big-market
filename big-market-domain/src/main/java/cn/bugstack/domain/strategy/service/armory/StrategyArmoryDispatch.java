@@ -6,6 +6,7 @@ import cn.bugstack.domain.strategy.model.entity.StrategyRuleEntity;
 import cn.bugstack.domain.strategy.repository.IStrategyRepository;
 import cn.bugstack.types.enums.ResponseCode;
 import cn.bugstack.types.exception.AppException;
+import cn.hutool.core.util.StrUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
@@ -37,7 +38,7 @@ public class StrategyArmoryDispatch implements IStrategyArmory, IStrategyDispatc
         //缓存获取strategy
         StrategyEntity strategyEntity= repository.queryStrategyEntityByStrategyId(strategyId);
         String ruleModel = strategyEntity.getRuleWeight();//这个分段rule可能没有
-        if(ruleModel==null){
+        if(StrUtil.isBlank(ruleModel)){
             //该策略没有分段rule
             return;
         }
