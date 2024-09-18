@@ -42,6 +42,8 @@ public class StrategyArmoryDispatch implements IStrategyArmory, IStrategyDispatc
             //该策略没有分段rule
             return;
         }
+        //接下来就是有分段
+
         //根据strategyid和ruleModel去查，但是一个strategy就只有一个rule_weight,其实直接拿rule_weight去查就行
         //这里没有使用缓存
         StrategyRuleEntity strategyRuleEntity=repository.queryStrategyRuleByStrategyIdAndWeight(strategyId,ruleModel);

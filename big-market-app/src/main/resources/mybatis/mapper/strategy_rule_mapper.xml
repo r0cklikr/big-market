@@ -41,4 +41,10 @@
             and award_id = #{awardId}
         </if>
     </select>
+
+    <select id="queryStrategyRuleValueByStrategyIdAndRuleModel" parameterType="cn.bugstack.infrastructure.persistent.po.StrategyRule" resultType="java.lang.String">
+        select rule_value from strategy_rule
+        where strategy_id = #{strategyId} and rule_model = #{ruleModel}
+
+    </select>
 </mapper>

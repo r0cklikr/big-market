@@ -19,4 +19,6 @@ public interface IStrategyRuleDao {
     StrategyRule queryStrategyRuleByStrategyIdAndWeight(StrategyRule strategyRuleQuery);
 
     String queryStrategyRuleValue(StrategyRule strategyRule);
+
+    String queryStrategyRuleValueByStrategyIdAndRuleModel(StrategyRule strategyRule);
 }

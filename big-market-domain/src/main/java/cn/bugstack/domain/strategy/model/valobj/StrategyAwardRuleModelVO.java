@@ -1,6 +1,6 @@
 package cn.bugstack.domain.strategy.model.valobj;
 
-import cn.bugstack.domain.strategy.service.rule.factory.DefaultLogicFactory;
+import cn.bugstack.domain.strategy.service.rule.filter.factory.DefaultLogicFactory;
 import cn.bugstack.types.common.Constants;
 import cn.hutool.core.util.StrUtil;
 import lombok.AllArgsConstructor;
@@ -41,9 +41,13 @@ public class StrategyAwardRuleModelVO {
         List<String> ruleModelList = new ArrayList<>();
         String[] ruleModelValues = ruleModels.split(Constants.SPLIT);
         for (String ruleModelValue : ruleModelValues) {
+            if(!ruleModelValue.equals("rule_lock"))continue;
             if (DefaultLogicFactory.LogicModel.isCenter(ruleModelValue)) {
                 ruleModelList.add(ruleModelValue);
             }
+        }
+        if(ruleModelList.size() == 0){
+            return null;
         }
         return ruleModelList.toArray(new String[0]);
     }

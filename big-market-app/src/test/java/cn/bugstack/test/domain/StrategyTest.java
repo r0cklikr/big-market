@@ -36,7 +36,7 @@ public class StrategyTest {
      */
     @Test
     public void test_strategyArmory() {
-        strategyArmory.assembleLotteryStrategy(100003L);
+        strategyArmory.assembleLotteryStrategy(100001L);
         //log.info("测试结果：{}", success);
     }
 
@@ -48,7 +48,7 @@ public class StrategyTest {
         ///log.info("测试结果：{} - 奖品ID值", strategyArmory.getRandomAwardId(100001L));
         //log.info("测试结果：{} - 奖品ID值", strategyArmory.getRandomAwardId(100001L));
         //log.info("测试结果：{} - 奖品ID值", strategyArmory.getRandomAwardId(100001L));
-        log.info("测试结果：{} - 奖品ID值", strategyArmory.getRandomAwardId(100003L));
+        //log.info("测试结果：{} - 奖品ID值", strategyArmory.getRandomAwardId(100003L));
         //log.info("测试结果：{} - 奖品ID值", strategyArmory.getRandomAwardId(100001L,"6000:102,103"));
         //log.info("测试结果：{} - 奖品ID值", strategyArmory.getRandomAwardId(100001L,"7000:104,105"));
         //log.info("测试结果：{} - 奖品ID值", strategyArmory.getRandomAwardId(100001L,"8000:106,107"));
@@ -77,7 +77,7 @@ public class StrategyTest {
     public void test_performRaffle() {
         RaffleFactorEntity raffleFactorEntity = RaffleFactorEntity.builder()
                 .userId("xiaofuge")
-                .strategyId(100003L)
+                .strategyId(100001L)
                 .build();
 
         RaffleAwardEntity raffleAwardEntity = raffleStrategy.performRaffle(raffleFactorEntity);
