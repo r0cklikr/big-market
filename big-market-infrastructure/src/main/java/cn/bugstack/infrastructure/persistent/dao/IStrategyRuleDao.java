@@ -17,4 +17,6 @@ public interface IStrategyRuleDao {
     List<StrategyRule> queryStrategyRuleList();
 
     StrategyRule queryStrategyRuleByStrategyIdAndWeight(StrategyRule strategyRuleQuery);
+
+    String queryStrategyRuleValue(StrategyRule strategyRule);
 }

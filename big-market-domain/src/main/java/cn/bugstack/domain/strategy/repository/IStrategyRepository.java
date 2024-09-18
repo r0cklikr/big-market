@@ -31,4 +31,6 @@ public interface IStrategyRepository {
     public int getRateRange(String key);
 
     StrategyRuleEntity queryStrategyRuleByStrategyIdAndWeight(Long strategyId,String ruleModel);
+
+    String queryStrategyRuleValue(Long strategyId, Integer awardId, String ruleModel);
 }

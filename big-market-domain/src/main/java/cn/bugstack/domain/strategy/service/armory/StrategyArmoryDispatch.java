@@ -23,7 +23,7 @@ import java.util.stream.Collectors;
  */
 @Slf4j
 @Service
-public class StrategyArmoryDispatch implements IStrategyArmory,IStragedyDispatch {
+public class StrategyArmoryDispatch implements IStrategyArmory, IStrategyDispatch {
 
     @Resource
     private IStrategyRepository repository;

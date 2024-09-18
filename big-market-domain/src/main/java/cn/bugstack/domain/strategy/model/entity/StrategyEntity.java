@@ -20,7 +20,7 @@ public class StrategyEntity {
 
     public String[] getRuleModels() {
         //可能是空的
-        if(StrUtil.isEmpty(ruleModels)){
+        if(StrUtil.isBlank(ruleModels)){
             return null;
         }
         String[] split = ruleModels.split(Constants.SPLIT);
