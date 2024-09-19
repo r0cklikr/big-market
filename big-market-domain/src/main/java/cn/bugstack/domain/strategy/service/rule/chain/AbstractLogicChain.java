@@ -7,10 +7,15 @@ public abstract class AbstractLogicChain implements ILogicChain {
     private ILogicChain next;
 
 
+    //@Override
+    //public ILogicChain addNext(ILogicChain next) {
+    //    this.next=next;
+    //    return next;
+    //}
+
     @Override
-    public ILogicChain addNext(ILogicChain next) {
+    public void setNext(ILogicChain next) {
         this.next=next;
-        return next;
     }
 
     @Override

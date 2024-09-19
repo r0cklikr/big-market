@@ -44,10 +44,12 @@ public class DefaultChainFactory {
         //责任链的顺序与数据库rule_models顺序有关
         for(int i=1;i<ruleModels.length;i++) {
             ILogicChain nextChain = logicChainGroup.get(ruleModels[i]);
-            current=current.addNext(nextChain);
+            current.setNext(nextChain);
+            current=nextChain;
 
         }
-        current.addNext(logicChainGroup.get("default"));
+       // current.addNext(logicChainGroup.get("default"));
+        current.setNext(logicChainGroup.get("default"));
         return iLogicChain;
     }
 

@@ -21,7 +21,7 @@ public class RuleWeightLogicChain extends AbstractLogicChain {
     private IStrategyRepository repository;
     @Resource
     private IStrategyDispatch strategyDispatch;
-    public Long userScore = 1000L;
+    public Long userScore = 7000L;
 
     /**
      * 权重规则过滤；
