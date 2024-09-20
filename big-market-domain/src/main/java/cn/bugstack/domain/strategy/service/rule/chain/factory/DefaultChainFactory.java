@@ -5,6 +5,7 @@ import cn.bugstack.domain.strategy.repository.IStrategyRepository;
 import cn.bugstack.domain.strategy.service.rule.chain.ILogicChain;
 import cn.hutool.core.collection.CollUtil;
 import cn.hutool.core.util.StrUtil;
+import lombok.*;
 import org.springframework.stereotype.Service;
 
 import java.util.Map;
@@ -36,7 +37,7 @@ public class DefaultChainFactory {
         //空校验
         if(ruleModels == null || ruleModels.length == 0) {
              //用兜底节点
-            return logicChainGroup.get("default");
+            return logicChainGroup.get("rule_default");
         }
         //走责任链
         ILogicChain iLogicChain = logicChainGroup.get(ruleModels[0]);
@@ -52,5 +53,28 @@ public class DefaultChainFactory {
         current.setNext(logicChainGroup.get("default"));
         return iLogicChain;
     }
+    @Data
+    @Builder
+    @AllArgsConstructor
+    @NoArgsConstructor
+    public static class StrategyAwardVO {
+        /** 抽奖奖品ID - 内部流转使用 */
+        private Integer awardId;
+        /**  */
+        private String logicModel;
+    }
 
+    @Getter
+    @AllArgsConstructor
+    public enum LogicModel {
+
+        RULE_DEFAULT("rule_default", "默认抽奖"),
+        RULE_BLACKLIST("rule_blacklist", "黑名单抽奖"),
+        RULE_WEIGHT("rule_weight", "权重规则"),
+        ;
+
+        private final String code;
+        private final String info;
+
+    }
 }

@@ -1,8 +1,10 @@
 package cn.bugstack.domain.strategy.service.rule.chain;
 
+import cn.bugstack.domain.strategy.service.rule.chain.factory.DefaultChainFactory;
+
 public interface ILogicChain {
 
-    Integer logic(String userId,Long strategyId);
+    DefaultChainFactory.StrategyAwardVO logic(String userId, Long strategyId);
 
     //ILogicChain addNext(ILogicChain next);
     void setNext(ILogicChain next);

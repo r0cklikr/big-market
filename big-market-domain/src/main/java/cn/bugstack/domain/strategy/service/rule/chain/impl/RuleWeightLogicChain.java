@@ -5,6 +5,7 @@ import cn.bugstack.domain.strategy.model.valobj.RuleLogicCheckTypeVO;
 import cn.bugstack.domain.strategy.repository.IStrategyRepository;
 import cn.bugstack.domain.strategy.service.armory.IStrategyDispatch;
 import cn.bugstack.domain.strategy.service.rule.chain.AbstractLogicChain;
+import cn.bugstack.domain.strategy.service.rule.chain.factory.DefaultChainFactory;
 import cn.hutool.core.util.StrUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
@@ -30,7 +31,7 @@ public class RuleWeightLogicChain extends AbstractLogicChain {
      *
      */
     @Override
-    public Integer logic(String userId, Long strategyId) {
+    public DefaultChainFactory.StrategyAwardVO logic(String userId, Long strategyId) {
         //根据条件查询value值,这种规则具体到策略不是奖品
         String ruleValue = repository.queryStrategyRuleValueByStrategyIdAndRuleModel(strategyId,ruleModel());
         //空校验
@@ -53,9 +54,12 @@ public class RuleWeightLogicChain extends AbstractLogicChain {
             String key=map.get(point);
             Integer randomAwardId = strategyDispatch.getRandomAwardId(strategyId, key);
 
-            log.info("抽奖责任链-权重接管 userId: {} strategyId: {} ruleModel: {} awardId: {}", userId, strategyId, ruleModel(), randomAwardId);
+            log.info("抽奖责任链-权重接管 userId: {} strategyId: {} ruleModel: {} awardId: {},当前积分:{}", userId, strategyId, ruleModel(), randomAwardId,userScore);
 
-            return  randomAwardId;
+            return  DefaultChainFactory.StrategyAwardVO.builder()
+                    .awardId(randomAwardId)
+                    .logicModel(ruleModel())
+                    .build();
         }
         //放行
         log.info("抽奖责任链-权重放行 userId: {} strategyId: {} ruleModel: {}", userId, strategyId, ruleModel());

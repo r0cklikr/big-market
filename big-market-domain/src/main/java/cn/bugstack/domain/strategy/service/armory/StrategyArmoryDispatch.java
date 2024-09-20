@@ -4,9 +4,11 @@ import cn.bugstack.domain.strategy.model.entity.StrategyAwardEntity;
 import cn.bugstack.domain.strategy.model.entity.StrategyEntity;
 import cn.bugstack.domain.strategy.model.entity.StrategyRuleEntity;
 import cn.bugstack.domain.strategy.repository.IStrategyRepository;
+import cn.bugstack.types.common.Constants;
 import cn.bugstack.types.enums.ResponseCode;
 import cn.bugstack.types.exception.AppException;
 import cn.hutool.core.util.StrUtil;
+
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
@@ -31,9 +33,18 @@ public class StrategyArmoryDispatch implements IStrategyArmory, IStrategyDispatc
 
     @Override
     //生成两套随机表，一个是所有的奖品，一个是分段奖品
+
     public void assembleLotteryStrategy(Long strategyId) {
-        // 1. 查询策略配置,根据传入的策略id查询拥有的策略-奖品列表
+        // 1. 查询策略配置,根据传入的策略id查询拥有的策略-奖品信息列表
         List<StrategyAwardEntity> strategyAwardEntities = repository.queryStrategyAwardList(strategyId);
+        //获得了奖品信息,缓存奖品库存,每个策略分配的奖品数量不一样即使是同一个奖品，锁定奖品需要strategyId+awardId
+        for(StrategyAwardEntity strategyAwardEntity : strategyAwardEntities){
+            Integer awardId = strategyAwardEntity.getAwardId();
+            Integer awardCount = strategyAwardEntity.getAwardCount();
+            cacheStrategyAwardCount(strategyId,awardId,awardCount);//添加缓存
+        }
+
+
         assembleLotteryStrategy(strategyId.toString(),strategyAwardEntities);//可能没有分段，全部加进去
         //缓存获取strategy
         StrategyEntity strategyEntity= repository.queryStrategyEntityByStrategyId(strategyId);
@@ -66,6 +77,13 @@ public class StrategyArmoryDispatch implements IStrategyArmory, IStrategyDispatc
         }
 
     }
+
+    private void cacheStrategyAwardCount(Long strategyId, Integer awardId, Integer awardCount) {
+        String cacheKey = Constants.RedisKey.STRATEGY_AWARD_COUNT_KEY + strategyId + "_" + awardId;
+        repository.cacheStrategyAwardCount(cacheKey, awardCount);//缓存
+
+    }
+
 
     private void assembleLotteryStrategy(String key,List<StrategyAwardEntity> strategyAwardEntities){
         //比如有3个奖品,0.2,0.2,0.6
@@ -130,6 +148,14 @@ public class StrategyArmoryDispatch implements IStrategyArmory, IStrategyDispatc
 
         int range= repository.getRateRange(key);
         return repository.getStrategyAwardAssemble(key,new SecureRandom().nextInt(range));
+    }
+
+    //扣减库存
+    @Override
+    public Boolean subtractionAwardStock(Long strategyId, Integer awardId) {
+        String cacheKey = Constants.RedisKey.STRATEGY_AWARD_COUNT_KEY + strategyId + "_" + awardId;
+        return repository.subtractionAwardStock(cacheKey);
+
     }
 
 }
