@@ -1,4 +1,4 @@
-package cn.bugstack.domain.strategy.service.rule;
+package cn.bugstack.domain.strategy.service;
 
 import cn.bugstack.domain.strategy.model.valobj.StrategyAwardStockKeyVO;
 
@@ -7,6 +7,7 @@ import cn.bugstack.domain.strategy.model.valobj.StrategyAwardStockKeyVO;
  * @description 抽奖库存相关服务，获取库存消耗队列
  * @create 2024-02-09 12:17
  */
+//相当于IService
 public interface IRaffleStock {
 
     /**

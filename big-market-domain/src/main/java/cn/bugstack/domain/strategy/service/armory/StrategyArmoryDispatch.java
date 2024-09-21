@@ -26,6 +26,7 @@ import java.util.stream.Collectors;
  */
 @Slf4j
 @Service
+//说白了就是ISservice的实现类
 public class StrategyArmoryDispatch implements IStrategyArmory, IStrategyDispatch {
 
     @Resource
@@ -34,7 +35,7 @@ public class StrategyArmoryDispatch implements IStrategyArmory, IStrategyDispatc
     @Override
     //生成两套随机表，一个是所有的奖品，一个是分段奖品
 
-    public void assembleLotteryStrategy(Long strategyId) {
+    public boolean assembleLotteryStrategy(Long strategyId) {
         // 1. 查询策略配置,根据传入的策略id查询拥有的策略-奖品信息列表
         List<StrategyAwardEntity> strategyAwardEntities = repository.queryStrategyAwardList(strategyId);
         //获得了奖品信息,缓存奖品库存,每个策略分配的奖品数量不一样即使是同一个奖品，锁定奖品需要strategyId+awardId
@@ -51,7 +52,7 @@ public class StrategyArmoryDispatch implements IStrategyArmory, IStrategyDispatc
         String ruleModel = strategyEntity.getRuleWeight();//这个分段rule可能没有
         if(StrUtil.isBlank(ruleModel)){
             //该策略没有分段rule
-            return;
+            return true;
         }
         //接下来就是有分段
 
@@ -75,7 +76,7 @@ public class StrategyArmoryDispatch implements IStrategyArmory, IStrategyDispatc
             assembleLotteryStrategy(strategyId.toString().concat("_").concat(key),collect);
 
         }
-
+        return true;
     }
 
     private void cacheStrategyAwardCount(Long strategyId, Integer awardId, Integer awardCount) {

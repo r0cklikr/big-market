@@ -5,6 +5,8 @@ package cn.bugstack.domain.strategy.service.armory;
  * @description 策略装配库(兵工厂)，负责初始化策略计算
  * @create 2023-12-23 09:44
  */
+
+//说白了就是一个IService
 public interface IStrategyArmory {
 
     /**
@@ -13,7 +15,7 @@ public interface IStrategyArmory {
      * @param strategyId 策略ID
      * @return 装配结果
      */
-    void assembleLotteryStrategy(Long strategyId);
+    boolean assembleLotteryStrategy(Long strategyId);
 
 
 

@@ -2,7 +2,7 @@ package cn.bugstack.trigger.job;
 
 import cn.bugstack.domain.strategy.model.valobj.StrategyAwardStockKeyVO;
 
-import cn.bugstack.domain.strategy.service.rule.IRaffleStock;
+import cn.bugstack.domain.strategy.service.IRaffleStock;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
