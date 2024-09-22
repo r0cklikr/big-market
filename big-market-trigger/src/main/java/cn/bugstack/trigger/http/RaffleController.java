@@ -52,7 +52,7 @@ public class RaffleController implements IRaffleService {
     public Response<Boolean> strategyArmory(@RequestParam Long strategyId) {
         try {
             log.info("抽奖策略装配开始 strategyId：{}", strategyId);
-            boolean armoryStatus = strategyArmory.assembleLotteryStrategy(strategyId);
+            boolean armoryStatus = strategyArmory.assembleLotteryStrategy(strategyId);//装载，配库存
             Response<Boolean> response = Response.<Boolean>builder()
                     .code(ResponseCode.SUCCESS.getCode())
                     .info(ResponseCode.SUCCESS.getInfo())

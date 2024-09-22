@@ -42,6 +42,7 @@ public class DefaultChainFactory {
         //走责任链
         ILogicChain iLogicChain = logicChainGroup.get(ruleModels[0]);
         ILogicChain current=iLogicChain;
+        //根据该策略拥有的规则加入对应的处理器节点
         //责任链的顺序与数据库rule_models顺序有关
         for(int i=1;i<ruleModels.length;i++) {
             ILogicChain nextChain = logicChainGroup.get(ruleModels[i]);

@@ -57,15 +57,30 @@ public class RaffleStrategyTest {
 
 
     @Test
-    public void reds(){
-        redissonClient.getBucket("bas").delete();
-        RMap<Object, Object> map = redissonClient.getMap("bas");
-        map.put("123",123);
-        map.remove("123");
-        System.out.println(redissonClient.getMap("bas").isExists());
-        System.out.println(redissonClient.getMap("bas").get("123"));
-        //RBucket<Object> bucket = redissonClient.getBucket("helllo");
-        //bucket.set("asd");
+    public void reds() throws InterruptedException {
+        String cacheKey = "test2";
+        RBlockingQueue<Integer> blockingQueue = redissonClient.getBlockingQueue(cacheKey);
+        RDelayedQueue<Integer> delayedQueue = redissonClient.getDelayedQueue(blockingQueue);
+       // delayedQueue.offer(1123, 30, TimeUnit.SECONDS);
+       // delayedQueue.offer(23430,10, TimeUnit.SECONDS);
+
+       //System.out.println( redissonClient.<Integer>getBlockingQueue(cacheKey).take());
+        //固定搭配哈哈
+        //RBlockingQueue<Integer> blockingQueue = redissonClient.getBlockingQueue(cacheKey);
+        //RDelayedQueue<Integer> delayedQueue = redissonClient.getDelayedQueue(blockingQueue);
+        //delayedQueue.offer(1123, 30, TimeUnit.SECONDS);
+        //delayedQueue.offer(23430,10, TimeUnit.SECONDS);
+//        redissonClient.getBucket("bas").delete();
+//        RMap<Object, Object> map = redissonClient.getMap("bas");
+//        map.put("123",123);
+//        //map.remove("123");
+//        //RBucket<Object> bucket = redissonClient.getBucket("bas");
+//
+//        System.out.println(redissonClient.getList("bas").isExists());
+//        System.out.println(redissonClient.getMap("bas").isExists());
+//        System.out.println(redissonClient.getMap("bas").get("123"));
+//        //RBucket<Object> bucket = redissonClient.getBucket("helllo");
+//        //bucket.set("asd");
 
 
     }
