@@ -6,6 +6,7 @@ import cn.bugstack.domain.activity.model.entity.*;
 import cn.bugstack.domain.activity.model.valobj.ActivitySkuStockKeyVO;
 
 import java.util.Date;
+import java.util.List;
 
 /**
  * @author Fuzhengwei bugstack.cn @小傅哥
@@ -45,4 +46,8 @@ public interface IActivityRepository {
     ActivityAccountEntity queryActivityAccountByUserId(String userId, Long activityId);
 
     ActivityAccountMonthEntity queryActivityAccountMonthByUserId(String userId, Long activityId, String month);
+
+    List<ActivitySkuEntity> queryActivitySkuListByActivityId(Long activityId);
+
+    Long getRaffleTimesByUserIdAndActivityId(String userId, Long activityId);
 }

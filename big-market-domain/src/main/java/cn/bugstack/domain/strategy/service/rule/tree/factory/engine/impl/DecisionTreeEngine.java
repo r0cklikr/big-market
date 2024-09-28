@@ -32,7 +32,7 @@ public class DecisionTreeEngine implements IDecisionTreeEngine {
     @Override
     //每个节点都有两个子节点，一个是放行一个是接管，那么当本节点经过处理后，有一个结果，如果这个结果是放行那么就走放行的节点，否则走接管节点
     //每个节点都有一个返回值
-    public DefaultTreeFactory.StrategyAwardVO process(String userId, Long strategyId, Integer awardId) {
+    public DefaultTreeFactory.StrategyAwardVO process(String userId, Long strategyId, Integer awardId,Long activityId) {
         DefaultTreeFactory.StrategyAwardVO strategyAwardData = null;
 
         // 获取根节点
@@ -49,7 +49,7 @@ public class DecisionTreeEngine implements IDecisionTreeEngine {
             String ruleValue = ruleTreeNode.getRuleValue();//获取当前节点rule value,因为lock节点需要通过lock数判断，还有幸运奖需要返回一个区间的随机值
 
             // 调用处理器
-            DefaultTreeFactory.TreeActionEntity logicEntity = logicTreeNode.logic(userId, strategyId, awardId,ruleValue);//拦截，放行
+            DefaultTreeFactory.TreeActionEntity logicEntity = logicTreeNode.logic(userId, strategyId, awardId,ruleValue,activityId);//拦截，放行
             RuleLogicCheckTypeVO ruleLogicCheckTypeVO = logicEntity.getRuleLogicCheckType();
             strategyAwardData = logicEntity.getStrategyAwardVO();
             log.info("决策树引擎【{}】treeId:{} node:{} code:{}", ruleTreeVO.getTreeName(), ruleTreeVO.getTreeId(), nextNode, ruleLogicCheckTypeVO.getCode());

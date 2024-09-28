@@ -19,7 +19,7 @@ public class RuleLuckAwardLogicTreeNode implements ILogicTreeNode {
 
     @Override
     //rule_value:
-    public DefaultTreeFactory.TreeActionEntity logic(String userId, Long strategyId, Integer awardId,String ruleValue) {
+    public DefaultTreeFactory.TreeActionEntity logic(String userId, Long strategyId, Integer awardId,String ruleValue,Long activityId) {
         log.info("规则过滤-兜底奖品 userId:{} strategyId:{} awardId:{} ruleValue:{}", userId, strategyId, awardId, ruleValue);
         String[] split = ruleValue.split(":");
         if (split.length == 0) {

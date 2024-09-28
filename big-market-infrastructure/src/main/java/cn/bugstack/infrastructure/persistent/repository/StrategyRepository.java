@@ -37,7 +37,8 @@ public class StrategyRepository implements IStrategyRepository {
 
     @Resource
     private IStrategyAwardDao strategyAwardDao;
-
+    @Resource
+    private IRaffleActivityDao raffleActivityDao;
     @Resource
     private IStrategyDao strategyDao;
     @Resource
@@ -318,6 +319,11 @@ public class StrategyRepository implements IStrategyRepository {
         // 返回数据
         return strategyAwardEntity;
 
+    }
+
+    @Override
+    public Long queryStrategyIdByActivityId(Long activityId) {
+        return raffleActivityDao.queryStrategyIdByActivityId(activityId);
     }
 
 

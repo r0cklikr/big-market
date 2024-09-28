@@ -19,4 +19,5 @@ public interface IRaffleActivityAccountDayDao {
 
     void insertActivityAccountDay(RaffleActivityAccountDay raffleActivityAccountDay);
 
+    RaffleActivityAccountDay getRaffleTimesByUserIdAndActivityId(String userId, Long activityId);
 }

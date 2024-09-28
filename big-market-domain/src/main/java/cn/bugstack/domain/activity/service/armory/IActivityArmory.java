@@ -6,7 +6,7 @@ package cn.bugstack.domain.activity.service.armory;
  * @create 2024-03-30 09:09
  */
 public interface IActivityArmory {
-
+    boolean assembleActivitySkuByActivityId(Long activityId);
     boolean assembleActivitySku(Long sku);
 
 }

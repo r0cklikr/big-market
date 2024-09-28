@@ -84,7 +84,11 @@ public class StrategyArmoryDispatch implements IStrategyArmory, IStrategyDispatc
         repository.cacheStrategyAwardCount(cacheKey, awardCount);//缓存
 
     }
-
+    @Override
+    public boolean assembleLotteryStrategyByActivityId(Long activityId) {
+        Long strategyId = repository.queryStrategyIdByActivityId(activityId);
+        return assembleLotteryStrategy(strategyId);
+    }
 
     private void assembleLotteryStrategy(String key,List<StrategyAwardEntity> strategyAwardEntities){
         //比如有3个奖品,0.2,0.2,0.6
