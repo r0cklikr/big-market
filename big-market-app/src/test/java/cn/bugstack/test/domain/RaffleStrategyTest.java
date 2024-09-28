@@ -58,9 +58,13 @@ public class RaffleStrategyTest {
 
     @Test
     public void reds() throws InterruptedException {
-        String cacheKey = "test2";
-        RBlockingQueue<Integer> blockingQueue = redissonClient.getBlockingQueue(cacheKey);
-        RDelayedQueue<Integer> delayedQueue = redissonClient.getDelayedQueue(blockingQueue);
+        String cacheKey = "1test2";
+        RMap<Object, Object> map = redissonClient.getMap(cacheKey);
+        map.put("1", "1");
+        System.out.println(redissonClient.getBucket(cacheKey).isExists());
+
+        // RBlockingQueue<Integer> blockingQueue = redissonClient.getBlockingQueue(cacheKey);
+      //  RDelayedQueue<Integer> delayedQueue = redissonClient.getDelayedQueue(blockingQueue);
        // delayedQueue.offer(1123, 30, TimeUnit.SECONDS);
        // delayedQueue.offer(23430,10, TimeUnit.SECONDS);
 
@@ -91,6 +95,7 @@ public class RaffleStrategyTest {
 
     @Test
     public void test_performRaffle() throws InterruptedException {
+        log.info("测试结果：{}", strategyArmory.assembleLotteryStrategy(100001L));
         RaffleFactorEntity raffleFactorEntity = RaffleFactorEntity.builder()
                 .userId("xiaofuge")
                 .strategyId(100001L)

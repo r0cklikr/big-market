@@ -101,7 +101,13 @@ redis:
       ping-interval: 60000
       keep-alive: true
       password: Ljj1264066839
-
+spring:
+  rabbitmq:
+    host: 101.34.58.190
+    port: 5672
+    virtual-host: /xfg
+    username: ljjkr
+    password: 123
 # 日志
 logging:
   level:
